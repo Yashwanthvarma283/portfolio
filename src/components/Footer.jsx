@@ -1,6 +1,6 @@
 import { portfolioData } from '../data/portfolioData';
 
-export default function Footer() {
+export default function Footer({ onReplayLoader }) {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t-2 border-accent bg-paper-100 dark:bg-ink-900">
@@ -8,9 +8,20 @@ export default function Footer() {
         <p className="font-mono text-xs text-ink-400 dark:text-ink-600 uppercase tracking-widest">
           {portfolioData.firstName} · {year}
         </p>
-        <p className="font-mono text-xs text-ink-400 dark:text-ink-600 uppercase tracking-widest">
-          React · GSAP · Lenis
-        </p>
+        <div className="flex items-center gap-6">
+          {onReplayLoader && (
+            <button
+              onClick={onReplayLoader}
+              className="font-mono text-xs text-ink-400 dark:text-ink-600 hover:text-accent dark:hover:text-accent transition-colors uppercase tracking-widest flex items-center gap-1.5"
+              title="Replay cursive intro animation"
+            >
+              <span>⚡</span> Replay Intro
+            </button>
+          )}
+          <p className="font-mono text-xs text-ink-400 dark:text-ink-600 uppercase tracking-widest hidden sm:block">
+            React · GSAP · Lenis
+          </p>
+        </div>
       </div>
     </footer>
   );

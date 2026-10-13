@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,6 +12,7 @@ import Footer from './components/Footer';
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Read persisted theme on mount
   useEffect(() => {
@@ -39,19 +41,30 @@ export default function App() {
     });
   };
 
+  const replayLoader = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setIsLoading(true);
+  };
+
   return (
     <div className="min-h-screen bg-paper-100 dark:bg-ink-900 text-ink-800 dark:text-paper-200 transition-colors duration-400 font-sans antialiased">
+      {isLoading && (
+        <Preloader
+          isDark={isDark}
+          onComplete={() => setIsLoading(false)}
+        />
+      )}
       <CustomCursor />
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
       <main>
-        <Hero />
+        <Hero isLoaded={!isLoading} />
         <About />
         <Experience />
         <Projects />
         <Credentials />
         <Contact />
       </main>
-      <Footer />
+      <Footer onReplayLoader={replayLoader} />
     </div>
   );
 }

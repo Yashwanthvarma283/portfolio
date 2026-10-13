@@ -11,6 +11,7 @@ export default {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['"Cabinet Grotesk"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
+        script: ['"Mr Dafoe"', 'cursive'],
       },
       colors: {
         paper: {

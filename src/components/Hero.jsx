@@ -5,64 +5,29 @@ import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap';
 import { portfolioData } from '../data/portfolioData';
 import { useCountUp } from '../hooks/useCountUp';
 
-// ── Abstract geometric SVG (backend/API motif) ─────────────────
-function BackendMotif() {
+// ── Yashwanth Portrait Cutout Poster (Replaces concentric circles) ──
+function YashwanthPortrait({ isLoaded = true }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.85, rotate: -8 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="relative w-full h-full flex items-center justify-center"
+    <div
+      id="hero-portrait-slot"
+      className="relative w-[280px] xs:w-[320px] sm:w-[360px] md:w-[400px] lg:w-[420px] xl:w-[450px] flex items-center justify-center flex-shrink-0"
     >
-      <motion.svg
-        viewBox="0 0 340 340"
-        className="w-[280px] h-[280px] md:w-[340px] md:h-[340px] opacity-70 dark:opacity-50"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 80, ease: 'linear', repeat: Infinity }}
-      >
-        {/* Concentric rings */}
-        {[120, 90, 60, 30].map((r, i) => (
-          <circle
-            key={r}
-            cx="170" cy="170" r={r}
-            fill="none"
-            stroke="#C2622D"
-            strokeWidth={i === 0 ? 1.5 : 1}
-            strokeOpacity={0.15 + i * 0.1}
-            strokeDasharray={i % 2 === 0 ? '6 4' : 'none'}
-          />
-        ))}
-        {/* Node grid */}
-        {[0, 1, 2, 3, 4].map((col) =>
-          [0, 1, 2, 3, 4].map((row) => {
-            const x = 85 + col * 42.5;
-            const y = 85 + row * 42.5;
-            const dist = Math.sqrt(Math.pow(x - 170, 2) + Math.pow(y - 170, 2));
-            if (dist > 115) return null;
-            return (
-              <circle
-                key={`${col}-${row}`}
-                cx={x} cy={y} r={dist < 40 ? 4 : 2.5}
-                fill="#C2622D"
-                fillOpacity={dist < 40 ? 0.8 : 0.3}
-              />
-            );
-          })
-        )}
-        {/* Connecting lines */}
-        <line x1="170" y1="55"  x2="170" y2="285" stroke="#C2622D" strokeWidth="0.8" strokeOpacity="0.12" />
-        <line x1="55"  y1="170" x2="285" y2="170" stroke="#C2622D" strokeWidth="0.8" strokeOpacity="0.12" />
-        <line x1="88"  y1="88"  x2="252" y2="252" stroke="#C2622D" strokeWidth="0.8" strokeOpacity="0.08" />
-        <line x1="252" y1="88"  x2="88"  y2="252" stroke="#C2622D" strokeWidth="0.8" strokeOpacity="0.08" />
-      </motion.svg>
-
-      {/* Center pulse */}
       <motion.div
-        className="absolute w-3 h-3 rounded-full bg-accent"
-        animate={{ scale: [1, 1.6, 1], opacity: [0.8, 0.2, 0.8] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-      />
-    </motion.div>
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.96 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full flex items-center justify-center"
+      >
+        {/* Ambient warm gradient halo */}
+        <div className="absolute -inset-8 bg-gradient-to-tr from-accent/25 via-accent/10 to-transparent rounded-full blur-3xl opacity-50 dark:opacity-30 -z-10 pointer-events-none" />
+
+        <img
+          src="/yashwanth-cutout.png"
+          alt="Yashwanth Varma Racharla"
+          className="w-full h-auto max-h-[480px] md:max-h-[520px] lg:max-h-[570px] object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.22)] select-none pointer-events-none transition-transform duration-500 ease-out hover:scale-[1.015]"
+        />
+      </motion.div>
+    </div>
   );
 }
 
@@ -85,7 +50,7 @@ function StatCard({ stat }) {
 }
 
 // ── Hero ───────────────────────────────────────────────────────
-export default function Hero() {
+export default function Hero({ isLoaded = true }) {
   const sectionRef = useRef(null);
   const nameRef = useRef(null);
 
@@ -122,7 +87,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Main content — asymmetric 2-col */}
-      <div ref={nameRef} className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-0 my-auto py-10">
+      <div ref={nameRef} className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-8 my-auto py-10">
 
         {/* LEFT: Text */}
         <div className="flex-1 lg:pr-12">
@@ -206,10 +171,8 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* RIGHT: geometric motif */}
-        <div className="w-[260px] h-[260px] md:w-[340px] md:h-[340px] flex-shrink-0">
-          <BackendMotif />
-        </div>
+        {/* RIGHT: Yashwanth Portrait Cutout Poster */}
+        <YashwanthPortrait isLoaded={isLoaded} />
       </div>
 
       {/* Bottom stat strip */}
