@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────── */
+@layer base {
+  :root {
+    --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out:  cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer:  cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  /* Lenis smooth scroll */
+  html { scroll-behavior: initial; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  /* Custom cursor — hidden when JS cursor active */
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #FAF9F6; }
+  .dark ::-webkit-scrollbar-track { background: #141210; }
+  ::-webkit-scrollbar-thumb { background: #CFC9BE; border-radius: 3px; }
+  .dark ::-webkit-scrollbar-thumb { background: #302C28; }
+  ::-webkit-scrollbar-thumb:hover { background: #C2622D; }
+}
+
+/* ─── Utility Classes ────────────────────────────────────────── */
+@layer utilities {
+  /* Button press tactile */
+  .btn-press {
+    transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-press:active {
+    transform: scale(0.97);
+  }
+
+  /* Clip-path reveal helpers */
+  .clip-reveal-from-bottom {
+    clip-path: inset(0 0 100% 0);
+  }
+  .clip-reveal-visible {
+    clip-path: inset(0 0 0% 0);
+  }
+
+  /* Text gradient accent */
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #C2622D 0%, #E8854A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section label style */
+  .label-mono {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-ink-400 dark:text-ink-500;
+  }
+
+  /* Horizontal rule accent */
+  .rule-accent {
+    height: 2px;
+    background: #C2622D;
+  }
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: #C2622D;
+  color: #FEFDFB;
+}
+
+/* ─── Theme switch: circular reveal (View Transitions API) ───── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
+/* ─── Hero portrait: light travelling along the contour ──────── */
+@keyframes yr-orbit { to { stroke-dashoffset: -1; } }
+.yr-orbit { animation: yr-orbit 6s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .yr-orbit { animation: none; } }
+
+/* ─── Siri-style voice assistant ─────────────────────────────── */
+.siri-orb {
+  --l: 0.1;
+  --spd: 1;
+  position: relative;
+  border-radius: 9999px;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(circle at 50% 38%, #1d1736 0%, #07060d 72%);
+  box-shadow:
+    0 0 calc(14px + var(--l) * 46px) rgba(120, 92, 255, calc(.35 + var(--l) * .4)),
+    inset 0 0 14px rgba(255, 255, 255, .14);
+}
+.siri-inner {
+  position: absolute; inset: 0;
+  transform: scale(calc(.82 + var(--l) * .55));
+}
+.siri-blob {
+  position: absolute; inset: -22%;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(9px);
+  will-change: transform;
+}
+.siri-b1 { background: radial-gradient(circle at 28% 30%, #ff2d92 0, transparent 56%); animation: siri-spin calc(7s * var(--spd)) linear infinite; }
+.siri-b2 { background: radial-gradient(circle at 72% 34%, #0a84ff 0, transparent 56%); animation: siri-spin calc(9s * var(--spd)) linear infinite reverse; }
+.siri-b3 { background: radial-gradient(circle at 50% 76%, #bf5af2 0, transparent 56%); animation: siri-spin calc(11s * var(--spd)) linear infinite; }
+.siri-b4 { background: radial-gradient(circle at 38% 62%, #64d2ff 0, transparent 50%); animation: siri-spin calc(13s * var(--spd)) linear infinite reverse; }
+@keyframes siri-spin { to { transform: rotate(360deg); } }
+.siri-core {
+  position: absolute; left: 50%; top: 50%;
+  width: 48%; height: 48%;
+  transform: translate(-50%, -50%) scale(calc(.75 + var(--l) * .9));
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,255,255,0) 70%);
+  mix-blend-mode: screen;
+  opacity: calc(.4 + var(--l) * .6);
+  filter: blur(2px);
+}
+.siri-gloss {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: linear-gradient(160deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 38%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  pointer-events: none;
+}
+.siri-glow {
+  background:
+    radial-gradient(circle at 100% 100%, rgba(255,45,146,.34) 0%, rgba(191,90,242,.24) 24%, rgba(10,132,255,.18) 44%, transparent 66%);
+  animation: siri-hue 9s linear infinite;
+  filter: blur(8px);
+}
+@keyframes siri-hue { to { filter: blur(8px) hue-rotate(360deg); } }
+.siri-fade {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+  scrollbar-width: none;
+}
+.siri-fade::-webkit-scrollbar { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .siri-blob, .siri-glow { animation: none; }
+}
