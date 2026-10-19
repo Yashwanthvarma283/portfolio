@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Primary Portfolio URL -->
+  <url>
+    <loc>https://yashwanthvarma.me/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/yashwanth-portrait.jpg</image:loc>
+      <image:title>Yashwanth Varma Racharla</image:title>
+      <image:caption>Backend-focused Software Developer specialising in Java, Spring Boot, and RESTful API design.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/yashwanth-bust.png</image:loc>
+      <image:title>Yashwanth Varma Racharla</image:title>
+      <image:caption>Yashwanth Varma Racharla portrait illustration</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/projects/edonornet.svg</image:loc>
+      <image:title>eDonorNet Platform</image:title>
+      <image:caption>Blood donation and request platform connecting donors with people who need blood</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/projects/f1-paddock.svg</image:loc>
+      <image:title>F1 Paddock Fan Hub</image:title>
+      <image:caption>Formula 1 fan hub with live session countdowns, circuit telemetry, and standings</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/projects/portfolio.svg</image:loc>
+      <image:title>Interactive Developer Portfolio</image:title>
+      <image:caption>Static React portfolio with profile views, GSAP motion, and Lenis smooth scrolling</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/projects/codecompiler-ai.svg</image:loc>
+      <image:title>CodeCompiler AI</image:title>
+      <image:caption>Online code compiler paired with an intelligent coding assistant</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://yashwanthvarma.me/projects/view-expenses.svg</image:loc>
+      <image:title>View Expenses Platform</image:title>
+      <image:caption>Smart room and personal expense tracking dashboard</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Downloadable Resume -->
+  <url>
+    <loc>https://yashwanthvarma.me/resume.pdf</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

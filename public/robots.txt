@@ -1,0 +1,16 @@
+# ==============================================================================
+# robots.txt for Yashwanth Varma Racharla Portfolio
+# https://yashwanthvarma.me
+# ==============================================================================
+
+User-agent: *
+Allow: /
+
+# Disallow nothing - all public assets, projects, and portfolio sections are crawlable
+Disallow:
+
+# Host directive
+Host: https://yashwanthvarma.me
+
+# XML Sitemap location
+Sitemap: https://yashwanthvarma.me/sitemap.xml
